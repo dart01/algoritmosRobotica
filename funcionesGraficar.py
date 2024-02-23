@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy import integrate
 
-seleccion = int(input("ingrese su opcion: "))
+seleccion = int(input("ingrese su opcion \n 1) calcular temperatura: \n 2) funcion de transferencia: \n 33) carga y descarga circuito RC: "))
 if seleccion == 1:
 
 
@@ -60,23 +60,23 @@ elif seleccion ==2 :
 
 elif seleccion== 3:
 
+    def funcionTransferencia():
+        """
+        3)Implemente la ecuación de carga y descarga para un circuito RC. El usuario ingresa por teclado el
+        valor de voltaje (V), capacitancia (μF) y resistencia (Ω).
+        """
+        voltaje = float(input("Ingrese el voltaje: "))
+        capacitancia = float(input("Ingrese la capacitancia: "))
+        resistencia = float(input("Ingrese la resistencia: "))
+
+        t = np.linspace(0, 1, 100)  # Rango de tiempo
+        integral = np.log(np.abs(t)) / (capacitancia * resistencia)
+
+        plt.plot(t, integral)
+        plt.xlabel("Tiempo")
+        plt.ylabel("Valor integral")
+        plt.show()
     funcionTransferencia()
-    """
-    3)Implemente la ecuación de carga y descarga para un circuito RC. El usuario ingresa por teclado el
-    valor de voltaje (V), capacitancia (μF) y resistencia (Ω).
-    """
-    voltaje = float(input("Ingrese el voltaje: "))
-    capacitancia = float(input("Ingrese la capacitancia: "))
-    resistencia = float(input("Ingrese la resistencia: "))
-
-    t = np.linspace(0, 1, 100)  # Rango de tiempo
-    integral = np.log(np.abs(t)) / (capacitancia * resistencia)
-
-    plt.plot(t, integral)
-    plt.xlabel("Tiempo")
-    plt.ylabel("Valor integral")
-    plt.show()
-
     """
     4) Consulte y elabore un sistema coordenado X, Y y Z donde se dibuje un vector con coordenadas
     ingresadas por el usuario.
