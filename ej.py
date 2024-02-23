@@ -127,18 +127,33 @@
 # # Imprimir el resultado
 # print("Suma elemento a elemento:\n", suma)
 
+# import numpy as np
+# import matplotlib.pyplot as plt 
+
+# voltaje = float(input("Ingrese el voltaje: "))
+# capacitancia = float(input("Ingrese la capacitancia: "))
+# resistencia = float(input("Ingrese la resistencia: "))
+
+# t = np.linspace(0, 1, 100)  # Rango de tiempo
+# integral = np.log(np.abs(t)) / (capacitancia * resistencia)
+
+# plt.plot(t, integral)
+# plt.xlabel("Tiempo")
+# plt.ylabel("Valor integral")
+# plt.show()
+
 import numpy as np
-import matplotlib.pyplot as plt 
+from scipy import integrate
+import matplotlib.pyplot as plt
 
-voltaje = float(input("Ingrese el voltaje: "))
-capacitancia = float(input("Ingrese la capacitancia: "))
-resistencia = float(input("Ingrese la resistencia: "))
-
-t = np.linspace(0, 1, 100)  # Rango de tiempo
-integral = np.log(np.abs(t)) / (capacitancia * resistencia)
-
-plt.plot(t, integral)
-plt.xlabel("Tiempo")
-plt.ylabel("Valor integral")
+rMedida= 100
+Resistencia = 500
+alfa= 50
+temperatura = (rMedida - Resistencia) / (alfa * Resistencia)
+x= np.array([-200, -100, 0, 100, 200])
+y = np.array([38.5, 264.9, 100, 138.5, 264.9])
+plt.plot(x, y)
+plt.title("coportamiento PT100 de -200 a 200")
+plt.xlabel("temperatura")
+plt.ylabel("resistencia")
 plt.show()
-
