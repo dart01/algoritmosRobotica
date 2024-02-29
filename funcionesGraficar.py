@@ -61,16 +61,33 @@ elif seleccion== 3:
     3)Implemente la ecuación de carga y descarga para un circuito RC. El usuario ingresa por teclado el
     valor de voltaje (V), capacitancia (μF) y resistencia (Ω).
     """
-    voltaje = float(input("Ingrese el voltaje: "))
-    capacitancia = float(input("Ingrese la capacitancia: "))
-    resistencia = float(input("Ingrese la resistencia: "))
+    E = int(input("ingrese el voltaje de la fuente: "))  # Voltaje final (en voltios)
+    Vo = 0  # Voltaje inicial (en voltios)
+    t_carga = np.linspace(0, 5, 100)  # Rango de tiempo para la carga (en segundos)
+    t_descarga = np.linspace(0, 5, 100)  # Rango de tiempo para la descarga (en segundos)
+    R = int(input("  Resistencia (en ohmios): "))
+    C = float(input(" ingrese capacitancia: "))
+    
+    Vc_carga = E + (Vo - E) * np.exp(-t_carga / (R * C))
+    Vc_descarga = Vo * np.exp(-t_descarga / (R * C))
+    I_descarga = -(Vo / R) * np.exp(-t_descarga / (R * C))
 
-    t = np.linspace(0, 1, 100)  # Rango de tiempo
-    integral = np.log(np.abs(t)) / (capacitancia * resistencia)
+    # Gráfica de voltaje durante la carga
+    plt.plot(t_carga, Vc_carga, label="Carga")
 
-    plt.plot(t, integral)
-    plt.xlabel("Tiempo")
-    plt.ylabel("Valor integral")
+    # Gráfica de voltaje durante la descarga
+    plt.plot(t_descarga, Vc_descarga, label="Descarga")
+
+    plt.xlabel("Tiempo (t) en segundos")
+    plt.ylabel("Voltaje (Vc) en voltios")
+    plt.legend()
+    plt.show()
+
+    # Gráfica de la corriente durante la descarga
+    plt.plot(t_descarga, I_descarga, label="Corriente")
+    plt.xlabel("Tiempo (t) en segundos")
+    plt.ylabel("Corriente (I) en amperios")
+    plt.legend()
     plt.show()
 
 elif seleccion== 4:    
