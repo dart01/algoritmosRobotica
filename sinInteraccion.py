@@ -64,12 +64,21 @@ print(f"Coordenadas convertidas {coordenadasConvertidas}")
 
 """
 # define la resistencia del sensor a 0°C
-Resistencia = 100
-alfa = 0.003926
-resistenciaMedida = 138.5
+temperature = 26
+r0 = 100
+a = 0.00385
+b = 0.0000025
+def temperaturaRtd(temperatura, r0, a, b):
+  """
+    temperature: La temperatura en °C.
+    r0: La resistencia del RTD a 0°C en ohmios.
+    a: Coeficiente de temperatura del RTD a 0°C en °C⁻¹.
+    b: Coeficiente de temperatura cuadrático del RTD en °C⁻².
+  """
+  return r0 * (1 + a * temperatura + b * temperatura**2)
 
-temperatura = (resistenciaMedida - Resistencia) / (alfa * Resistencia)
-print("La temperatura es:", temperatura, " grados C")
+resistancia = temperaturaRtd(temperature, r0, a, b)
+print(f"La resistencia del RTD es de {resistancia} Ω")
 
 """
 5) funciones con maatrize de rotacion 
@@ -108,25 +117,25 @@ print("matriz de rotacion en Z:", matrizZ)
     carrera: Carrera del cilindro (m).
 """
 presion = 100000  
-diametro = 0.1  
+radio = 0.1  
 carrera = 0.2  
 
 
-def FuerzaAvance(presion, diametro, carrera):
+def fuerzaAvance(presion, radio ):
   
-  area = math.pi * (diametro / 2)**2
-  fuerza = area * presion
+  superficie = math.pi * (radio**2)
+  fuerza = superficie * presion
   return fuerza
 
-def fuerzaRetroceso(presion, diametro):
+def fuerzaRetroceso(presion, radio, carrera):
  
-  areaVastago = math.pi * (diametro / 2)**2
+  areaVastago = math.pi * ((radio**2)*(carrera**2))
   fuerzaRetroceso = areaVastago * presion
   return fuerzaRetroceso
 
 
-fuerzaAvance = FuerzaAvance(presion, diametro, carrera)
-fuerzaRetroceso = fuerzaRetroceso(presion, diametro)
+fuerzaAvance = fuerzaAvance(presion, radio)
+fuerzaRetroceso = fuerzaRetroceso(presion, radio, carrera)
 
-print("fuerza de avance: ", fuerzaAvance)
-print("fuerza de retroceso: ", fuerzaRetroceso)
+print("fuerza de avance: ", fuerzaAvance, "N")
+print("fuerza de retroceso: ", fuerzaRetroceso ,"N")
